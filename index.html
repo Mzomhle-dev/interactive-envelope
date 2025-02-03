@@ -16,70 +16,124 @@
 
         .container {
             position: relative;
-            width: 200px;
-            height: 150px;
+            width: 250px;
+            height: 180px;
             cursor: pointer;
         }
 
         .envelope {
+            position: absolute;
             width: 100%;
             height: 100%;
-            position: absolute;
+            background: #7B3F8F; /* Purple */
+            border-radius: 5px;
+            border: 2px solid #5A2A6E;
+            overflow: hidden;
             transition: transform 0.6s ease-in-out;
         }
 
+        /* Flap */
         .top-flap {
             position: absolute;
             width: 100%;
             height: 50%;
-            background: #7B3F8F; /* Purple */
+            background: #5A2A6E; /* Darker Purple */
             top: 0;
-            transform-origin: top;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
             transition: transform 0.6s ease-in-out;
         }
 
+        /* Bottom Part */
         .bottom-envelope {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: #5A2A6E; /* Darker Purple */
             bottom: 0;
             border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
+        /* Envelope Details (Lines) */
+        .lines {
+            position: absolute;
+            width: 80%;
+            height: 2px;
+            background: #fff;
+            top: 70%;
+            left: 10%;
+            border-radius: 2px;
+        }
+
+        .lines::before,
+        .lines::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #fff;
+            top: -10px;
+        }
+
+        .lines::after {
+            top: 10px;
+        }
+
+        /* Name on the Envelope */
+        .name {
+            position: absolute;
+            top: 40%;
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* Letter */
         .letter {
             position: absolute;
-            width: 90%;
-            height: 80%;
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            max-height: 100%;
             background: white;
             top: 10%;
-            left: 5%;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            transform: translateY(100%);
+            left: 50%;
+            transform: translateX(-50%) translateY(100%);
             transition: transform 0.6s ease-in-out;
         }
 
         .letter img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
             border-radius: 5px;
         }
 
+        /* Open Animation */
         .container.open .top-flap {
             transform: rotateX(180deg);
         }
 
         .container.open .letter {
-            transform: translateY(0);
+            transform: translateX(-50%) translateY(0);
         }
     </style>
 </head>
 <body>
 
     <div class="container" onclick="openEnvelope()">
-        <div class="top-flap"></div>
-        <div class="bottom-envelope"></div>
+        <div class="envelope">
+            <div class="top-flap"></div>
+            <div class="bottom-envelope">
+                <div class="lines"></div>
+                <div class="name">Asange</div>
+            </div>
+        </div>
         <div class="letter">
             <img src="https://raw.githubusercontent.com/Mzomhle-dev/interactive-envelope/refs/heads/main/Black%20and%20White%20Vintage%20Newspaper%20Wedding%20Invitation_20250130_105714_0000.jpg" alt="Your Letter">
         </div>
